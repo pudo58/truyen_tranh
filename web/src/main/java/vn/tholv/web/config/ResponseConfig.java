@@ -13,7 +13,7 @@ import static java.util.TimeZone.getTimeZone;
 public class ResponseConfig {
 	public static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
 	public static final String TIME_ZONE = "GMT+7";
-	//
+	// tholv added
 
 	@Bean
 	public ObjectMapper objectMapper() {

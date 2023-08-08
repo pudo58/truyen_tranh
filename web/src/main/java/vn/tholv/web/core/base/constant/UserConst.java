@@ -1,7 +1,7 @@
 package vn.tholv.web.core.base.constant;
 @SuppressWarnings("all")
 public class UserConst {
-    public static final int STATUS_ACTIVE = 1;
+    public static final int STATUS_ACTIVE = 1; //
     public static final int STATUS_INACTIVE = 0;
 
     public static final int LEVEL_BRONZE = 1;

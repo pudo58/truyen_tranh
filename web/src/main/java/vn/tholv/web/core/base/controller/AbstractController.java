@@ -39,9 +39,7 @@ public class AbstractController<T extends BaseEntity<T, ID>, ID> {
 	}
 
 	@GetMapping("/findAll")
-	public List<T> findAll() {
-		return this.service.findAll();
-	}
+	public List<T> findAll() {return this.service.findAll();}
 
 	@PostMapping("/findAllByCondition")
 	public List<T> findAll(@RequestBody T t) {

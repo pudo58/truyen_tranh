@@ -8,4 +8,5 @@ import vn.tholv.web.core.base.entity.Chapter;
 @RestController
 @RequestMapping("/chapter")
 public class ChapterController extends AbstractController<Chapter, Integer> {
+
 }

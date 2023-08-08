@@ -5,7 +5,7 @@ import vn.tholv.web.core.base.entity.ChapterImage;
 import vn.tholv.web.core.base.service.core.AbstractService;
 
 @Service
-public class ChapterImageServiceImpl extends AbstractService<ChapterImage, Integer> implements ChapterService {
+public class ChapterImageServiceImpl extends AbstractService<ChapterImage, Integer> implements ChapterImageService {
 	@Override
 	protected void validateInsert(ChapterImage entity) {
 

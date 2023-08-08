@@ -22,8 +22,8 @@ public class User extends BaseEntity<User, Integer> {
     private String username;
     private String password;
     private String email;
-    private int level = UserConst.LEVEL_BRONZE;
-    private int status = UserConst.STATUS_ACTIVE;
+    private short level = UserConst.LEVEL_BRONZE;
+    private short status = UserConst.STATUS_ACTIVE;
 
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

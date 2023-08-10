@@ -22,6 +22,7 @@ public class SecurityPath {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
+				if(line.trim().startsWith("#")) continue;
 				if (line.startsWith("permitAll()")) {
 					while ((line = reader.readLine()) != null && line.trim().startsWith("/")) {
 						paths.add(line.trim());

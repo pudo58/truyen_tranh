@@ -37,17 +37,16 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	//authentication
 	public UserDetailsService userDetailsService() {
 		return userDao::findByUsername;
 	}
 
 	@Bean
-	@Order(1)
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> {
-				auth.anyRequest().permitAll();
+				auth.requestMatchers("/api/auth").permitAll()
+					.anyRequest().authenticated();
 			})
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authenticationProvider(authenticationProvider())

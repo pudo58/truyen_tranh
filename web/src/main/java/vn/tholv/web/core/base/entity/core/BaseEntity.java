@@ -1,5 +1,6 @@
 package vn.tholv.web.core.base.entity.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import vn.tholv.web.core.override.util.CloneObject;
@@ -20,7 +21,9 @@ public class BaseEntity<T, ID> extends CloneObject<T> implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected ID id;
+	@JsonIgnore
 	protected Timestamp createdDate;
+	@JsonIgnore
 	protected Timestamp modifiedDate;
 
 	public ID getId() {

@@ -1,5 +1,6 @@
 package vn.tholv.web.core.exception.handle;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -40,10 +41,10 @@ public class HandlerExceptionRestController {
         return error;
     }
 
-	@ExceptionHandler(UsernameNotFoundException.class)
+	@ExceptionHandler(ExpiredJwtException.class)
 	public ExceptionError handleResourceNotFoundException(NullPointerException ex) {
 		ExceptionError error = new ExceptionError();
-		error.setMessage("Không tìm thấy người dùng");
+		error.setMessage("Phiên đăng nhập đã hết hạn");
 	    error.setIsError(true);
 		error.setDetail(ex.getMessage());
 		error.setStatus(HttpStatus.NOT_FOUND.value());

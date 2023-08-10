@@ -2,6 +2,7 @@ package vn.tholv.web.config.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import vn.tholv.web.core.base.service.JwtService;
 import vn.tholv.web.core.base.service.UserService;
+import vn.tholv.web.core.override.util.CookieHelper;
 
 import java.io.IOException;
 
@@ -27,7 +29,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		String authHeader = request.getHeader("Authorization");
+		String authHeader= request.getHeader("Authorization");
 		String token = null;
 		String username = null;
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {

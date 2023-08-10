@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import vn.tholv.web.core.base.entity.User;
 import vn.tholv.web.core.base.service.core.AbstractService;
 
+import java.util.List;
+
 import static vn.tholv.web.core.override.util.ValidatorUtil.isNull;
 
 @Service
@@ -58,5 +60,10 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
 		return this.repository.findAll((root, query, criteriaBuilder) ->
 			criteriaBuilder.equal(root.get("username"), username)
 		).stream().findFirst().orElse(null);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return super.findAll().stream().peek(user -> user.setPassword(null)).toList();
 	}
 }

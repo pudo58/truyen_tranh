@@ -7,4 +7,5 @@ import vn.tholv.web.core.base.entity.User;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Integer>, Dao<User, Integer> {
+	User findByUsername(String username);
 }

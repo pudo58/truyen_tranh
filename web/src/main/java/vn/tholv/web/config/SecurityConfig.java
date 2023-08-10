@@ -47,7 +47,7 @@ public class SecurityConfig {
 		return http.csrf(AbstractHttpConfigurer::disable)
 			.anonymous(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> {
-				auth.requestMatchers(SecurityPath.SECURITY_PATH_PERMIT_ALL.toArray(new String[0])).permitAll()
+				auth.requestMatchers(SecurityPath.toArray()).permitAll()
 					.anyRequest().authenticated();
 			})
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

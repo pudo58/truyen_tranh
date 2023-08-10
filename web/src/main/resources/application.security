@@ -1,1 +1,5 @@
-/auth
+#api public
+permitAll()
+    /auth
+    /user/save
+

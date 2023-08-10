@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import vn.tholv.web.config.filter.JwtAuthFilter;
 import vn.tholv.web.core.base.dao.UserDao;
+import vn.tholv.web.core.override.util.SecurityPath;
 
 @Configuration
 @EnableWebSecurity
@@ -44,8 +45,9 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(AbstractHttpConfigurer::disable)
+			.anonymous(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> {
-				auth.requestMatchers("/api/auth").permitAll()
+				auth.requestMatchers(SecurityPath.SECURITY_PATH_PERMIT_ALL.toArray(new String[0])).permitAll()
 					.anyRequest().authenticated();
 			})
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

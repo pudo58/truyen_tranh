@@ -27,7 +27,6 @@ import vn.tholv.web.core.override.util.SecurityPath;
 public class SecurityConfig {
 	private JwtAuthFilter authFilter;
 	private PasswordEncoder passwordEncoder;
-
 	private UserDao userDao;
 
 	@Autowired

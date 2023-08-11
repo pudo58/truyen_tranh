@@ -47,6 +47,7 @@ public class SecurityConfig {
 			.anonymous(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> {
 				auth.requestMatchers(SecurityPath.toArray()).permitAll()
+					.requestMatchers("/user/**").hasRole("ADMIN")
 					.anyRequest().authenticated();
 			})
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -19,17 +19,21 @@ import java.io.IOException;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-	@Autowired
 	private JwtService jwtService;
 
-	@Autowired
 	private UserService userService;
+
+	@Autowired
+	public JwtAuthFilter(JwtService jwtService, UserService userService) {
+		this.jwtService = jwtService;
+		this.userService = userService;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		String authHeader = request.getHeader("Cookie");
 		if (authHeader != null) {
-			authHeader = authHeader.substring(authHeader.indexOf("=") + 1, authHeader.length());
+			authHeader = authHeader.substring(authHeader.indexOf("=") + 1, authHeader.length()); //substr when accepcookie
 		}
 		String token = null;
 		String username = null;

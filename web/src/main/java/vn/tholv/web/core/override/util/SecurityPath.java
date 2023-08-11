@@ -24,12 +24,12 @@ public class SecurityPath {
 			while ((line = reader.readLine()) != null) {
 				if(line.trim().startsWith("#")) continue;
 				if (line.startsWith("permitAll()")) {
-					while ((line = reader.readLine()) != null && line.trim().startsWith("/")) {
+					while ((line = reader.readLine()) != null && line.trim().startsWith("\\t")) {
 						paths.add(line.trim());
 					}
 				}
 				if(line.startsWith("denyAll()")){
-					while ((line = reader.readLine()) != null && line.trim().startsWith("/")) {
+					while ((line = reader.readLine()) != null && line.trim().startsWith("\\t")) {
 						paths.remove(line.trim());
 					}
 				}

@@ -1,6 +1,12 @@
 #api public
 # Lưu ý tiền tố ko bắt đầu bằng /api vì nó đã được config trong server.servlet.context-path=/api
 permitAll()
-    /auth
-    /role/**
-
+	/v2/auth
+	/user/save
+role(ADMIN)
+	/user/**
+	/role/**
+	/auth
+	/permission/**
+	/role-permission/**
+	/user-role/*

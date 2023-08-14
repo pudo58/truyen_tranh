@@ -7,5 +7,5 @@ import vn.tholv.web.core.base.entity.Role;
 
 @RestController
 @RequestMapping("/role")
-public class RoleService extends AbstractController<Role,Integer> {
+public class RoleController extends AbstractController<Role,Integer> {
 }

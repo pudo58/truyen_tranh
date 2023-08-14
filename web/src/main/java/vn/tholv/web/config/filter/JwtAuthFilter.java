@@ -31,7 +31,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-		String authHeader = request.getHeader("Cookie");
+		String authHeader = request.getHeader("Cookie"); // get cookie from request
 		if (authHeader != null) {
 			authHeader = authHeader.substring(authHeader.indexOf("=") + 1, authHeader.length()); //substr when accepcookie
 		}

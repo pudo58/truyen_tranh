@@ -1,5 +1,5 @@
-#api public
 # Lưu ý tiền tố ko bắt đầu bằng /api vì nó đã được config trong server.servlet.context-path=/api
+# Các đầu api phải thụt lề vào 1 tab
 permitAll()
 	/v2/auth
 	/user/save

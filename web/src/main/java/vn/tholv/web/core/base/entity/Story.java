@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 import vn.tholv.web.core.base.entity.core.BaseEntity;
 
+import java.util.List;
+
 @Entity
 @Table(name = "stories")
 @NoArgsConstructor
@@ -18,10 +20,13 @@ import vn.tholv.web.core.base.entity.core.BaseEntity;
 public class Story extends BaseEntity<Story, Integer> {
 	private String title;
 	private String imageUrl;
-	private int likeCount;
-	private int viewCount;
+	private int likeCount = 0;
+	private int viewCount = 0;
 
 	@JoinColumn(name = "category_id")
 	@ManyToOne(targetEntity = Category.class,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	private Category category;
+
+	@OneToMany(mappedBy = "story", cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = StoryDetail.class)
+	private List<StoryDetail> storyDetailList;
 }

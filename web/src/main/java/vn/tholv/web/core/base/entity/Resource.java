@@ -23,6 +23,8 @@ public class Resource extends BaseEntity<Resource, Integer> {
 	@JoinColumn(name = "role_id")
 	private Role role;
 
+	private short level;
+
 	private  Boolean isActive = Boolean.TRUE;
 
 }

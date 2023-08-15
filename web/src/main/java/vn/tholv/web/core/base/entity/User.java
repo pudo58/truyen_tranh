@@ -7,8 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import vn.tholv.web.core.base.constant.UserConst;
 import vn.tholv.web.core.base.entity.core.BaseEntity;
@@ -68,5 +70,18 @@ public class User extends BaseEntity<User, Integer> implements UserDetails {
 	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public static User getCurrentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null) {
+			return null;
+		}
+		if(authentication.isAuthenticated()) {
+			if(authentication.getPrincipal() instanceof User) {
+				return (User) authentication.getPrincipal();
+			}
+		}
+		return null;
 	}
 }

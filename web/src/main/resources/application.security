@@ -4,9 +4,12 @@ permitAll()
 	/v2/auth
 	/user/save
 role(ADMIN)
-	/user/**
+#	/user/**
 	/role/**
 	/auth
 	/permission/**
 	/role-permission/**
 	/user-role/*
+authenticated()
+	/v2/chapter-image/**
+	/story/**

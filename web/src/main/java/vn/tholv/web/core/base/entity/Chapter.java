@@ -27,7 +27,7 @@ public class Chapter extends BaseEntity<Chapter, Integer> {
 	private Integer priority;
 	private Integer shareCount = 0;
 	@ManyToOne(targetEntity = Story.class)
-	@JoinColumn(name = "story_id")
+	@JoinColumn(name = "story_detail_id")
 	private StoryDetail storyDetail;
 
 	@OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = ChapterImage.class)

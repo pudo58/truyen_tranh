@@ -1,7 +1,7 @@
 import {Observable} from "rxjs";
-import {User} from "../model/user.model";
+import {User} from "../../model/user.model";
 
-export interface BaseInterface<T> {
+export interface BaseService<T> {
 	findAll(): Observable<User[]>;
 	findById(id: number): Observable<T>;
 	save(t: T): Observable<T>;

@@ -7,7 +7,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
 <app-root></app-root>
+<script defer>
+	document.addEventListener('mousemove', disableMouse);
+	document.addEventListener('click', disableMouse);
+	document.addEventListener('contextmenu', disableMouse);
+	document.addEventListener('mousedown', disableMouse);
+	document.addEventListener('keydown', disableViewSource);
+
+	function disableMouse(event) {
+		if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.tagName === 'SELECT' || event.target.tagName === 'OPTION' || event.target.tagName === 'LABEL'
+			|| event.target.tagName === 'UL' || event.target.tagName === 'LI') {
+			return;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	}
+
+	function disableViewSource(event) {
+		if (event.key === 'F12' || (event.ctrlKey && event.key === 'U')) {
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		}
+	}
+</script>
 </body>
 </html>

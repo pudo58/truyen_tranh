@@ -19,11 +19,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import vn.tholv.web.config.filter.JwtAuthFilter;
 import vn.tholv.web.core.base.dao.UserDao;
 import vn.tholv.web.core.override.util.SecurityDataSource;
 import vn.tholv.web.core.override.util.SecurityPath;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -54,6 +60,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		List<SecurityDataSource> securityDataSources = securityPath.getPathSecurity();
 		return http.csrf(AbstractHttpConfigurer::disable)
+            .cors(AbstractHttpConfigurer::disable)
 			.anonymous(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(auth -> {
 				securityDataSources.stream().forEach(value -> {
@@ -67,7 +74,7 @@ public class SecurityConfig {
 						auth.requestMatchers(value.getPaths().toArray(new String[0])).authenticated();
 					}
 					if (value.getRole() != null) {
-						auth.requestMatchers(value.getPaths().toArray(new String[0])).hasRole(value.getRole());
+						auth.requestMatchers(value.getPaths().toArray(new String[0])).hasAuthority(value.getRole());
 					}
 				});
 			})
@@ -89,4 +96,18 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
+
+    // turn off cors
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(Collections.singletonList("*"));
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new org.springframework.web.filter.CorsFilter(source);
+    }
 }

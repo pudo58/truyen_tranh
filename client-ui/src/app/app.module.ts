@@ -7,16 +7,30 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HeaderComponent} from "./component/header/header.component";
+import {FooterComponent} from "./component/footer/footer.component";
+import {CommonModule} from "@angular/common";
+import {NgSelectModule} from '@ng-select/ng-select';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
+
+
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		HeaderComponent,
+		FooterComponent,
 	],
 	imports: [
+		CommonModule,
 		BrowserModule,
 		AppRoutingModule,
+		NgSelectModule,
 		FormsModule,
+		ButtonModule,
 		HttpClientModule,
+		TableModule,
 		ReactiveFormsModule,
 		ToastrModule.forRoot({
 			timeOut: 5000,

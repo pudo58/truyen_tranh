@@ -19,48 +19,48 @@ import java.util.List;
 
 @Service
 public class ChapterImageServiceImpl extends AbstractService<ChapterImage, Integer> implements ChapterImageService {
-	private ResourceDao resourceDao;
+    private ResourceDao resourceDao;
 
-	@Autowired
-	public ChapterImageServiceImpl(ResourceDao resourceDao) {
-		this.resourceDao = resourceDao;
-	}
+    @Autowired
+    public ChapterImageServiceImpl(ResourceDao resourceDao) {
+        this.resourceDao = resourceDao;
+    }
 
-	@Override
-	protected void validateInsert(ChapterImage entity) {
+    @Override
+    protected void validateInsert(ChapterImage entity) {
 
-	}
+    }
 
-	@Override
-	protected void validateUpdate(ChapterImage entity) {
+    @Override
+    protected void validateUpdate(ChapterImage entity) {
 
-	}
+    }
 
-	@Override
-	public List<ChapterImage> findAll() {
-		return null;
-	}
+    @Override
+    public List<ChapterImage> findAll() {
+        return null;
+    }
 
 
-	@Override
-	public Page<ChapterImage> findAllStory(ChapterImageRequest model) {
-		User user = User.getCurrentUser();
-		Resource resource = this.getResource(model.getStoryId());
-		if (resource != null) {
-			if (user.getLevel() < resource.getLevel()) {
-				throw new RuntimeException("Bạn không có quyền xem chương này");
-			}
-		}
-		Pageable pageable = PageRequest.of(model.getPage(), model.getSize());
-		return this.repository.findAll((root, query, builder) ->
-				builder.equal(root.get("chapter").get(BaseEntity._id), model.getChapterId())
-			, pageable);
-	}
+    @Override
+    public Page<ChapterImage> findAllStory(ChapterImageRequest model) {
+        User user = User.getCurrentUser();
+        Resource resource = this.getResource(model.getStoryId());
+        if (resource != null) {
+            if (user.getLevel() < resource.getLevel()) {
+                throw new RuntimeException("Bạn không có quyền xem chương này");
+            }
+        }
+        Pageable pageable = PageRequest.of(model.getPage(), model.getSize());
+        return this.repository.findAll((root, query, builder) ->
+                builder.equal(root.get("chapter").get(BaseEntity._id), model.getChapterId())
+            , pageable);
+    }
 
-	private Resource getResource(Integer storyId) {
-		return resourceDao.findAll((root, query, builder) -> {
-			Join<Resource, Story> storyJoin = root.join("story");
-			return builder.equal(storyJoin.get(BaseEntity._id), storyId);
-		}).stream().findFirst().orElse(null);
-	}
+    private Resource getResource(Integer storyId) {
+        return resourceDao.findAll((root, query, builder) -> {
+            Join<Resource, Story> storyJoin = root.join("story");
+            return builder.equal(storyJoin.get(BaseEntity._id), storyId);
+        }).stream().findFirst().orElse(null);
+    }
 }

@@ -8,3 +8,16 @@ export class User {
 	modifiedDate?: Date;
 	createdDate?: Date;
 }
+
+export class AuthRequest {
+	username?: string;
+	password?: string;
+	rememberMe?: boolean;
+}
+
+export interface RouterData {
+	showHeader?: boolean;
+	showFooter?: boolean;
+	showSidebar?: boolean;
+	showNavbar?: boolean;
+}

@@ -1,10 +1,10 @@
 import {BASE_URL} from "../model/base.model";
 import {HttpClient} from "@angular/common/http";
-import {BaseInterface} from "./base.interface";
+import {BaseService} from "./base/base.service";
 import {User} from "../model/user.model";
 import {Observable} from "rxjs";
 
-export class UserService implements BaseInterface<User> {
+export class UserService implements BaseService<User> {
 	public url = BASE_URL + '/user';
 
 	constructor(private http: HttpClient) {

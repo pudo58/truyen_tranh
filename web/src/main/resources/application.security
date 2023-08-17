@@ -6,10 +6,10 @@ permitAll()
 role(ADMIN)
 #	/user/**
 	/role/**
-	/auth
 	/permission/**
 	/role-permission/**
 	/user-role/*
+	/category/**
 authenticated()
 	/v2/chapter-image/**
 	/story/**

@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<div class="col-lg-4 col-md-6 col-sm-6">
+			<div class="card shadow">
+				<div class="card-title text-center border-bottom">
+					<h2 class="p-3">Đăng nhập</h2>
+				</div>
+				<div class="card-body">
+					<form [formGroup]="form" (keyup.enter)="onSubmit()">
+						<div class="mb-4">
+							<label for="username" class="form-label">Tài khoản <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="username" formControlName="username"/>
+							<div class="text-danger" *ngIf="formControls['username']?.invalid && formSubmitted">
+								<small *ngIf="formControls['username']?.hasError('required')">Tài khoản không được để
+									trống</small>
+								<small *ngIf="formControls['username']?.hasError('maxlength')">
+									Tài khoản không được quá 20 ký tự
+								</small>
+							</div>
+						</div>
+						<div class="mb-4">
+							<label for="password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+							<input type="password" class="form-control" id="password" formControlName="password"/>
+							<div class="text-danger" *ngIf="formControls['password'].invalid && formSubmitted">
+								<small *ngIf="formControls['password'].hasError('required')">Mật khẩu không được để
+									trống</small>
+								<small *ngIf="formControls['password'].hasError('maxlength')">
+									Mật khẩu không được quá 20 ký tự
+								</small>
+							</div>
+						</div>
+						<div class="mb-4">
+							<input type="checkbox" class="form-check-input" id="remember" formControlName="rememberMe"/>
+							<label for="remember" class="form-label"> Nhớ đăng nhập</label>
+						</div>
+						<div class="d-grid">
+							<button type="submit" class="btn text-light bg-black" (click)="onSubmit()">Đăng nhập</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<app-spinner [isLoading]="isLoading"></app-spinner>
+

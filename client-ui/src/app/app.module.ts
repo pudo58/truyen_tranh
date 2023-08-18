@@ -11,9 +11,9 @@ import {HeaderComponent} from "./component/header/header.component";
 import {FooterComponent} from "./component/footer/footer.component";
 import {CommonModule} from "@angular/common";
 import {NgSelectModule} from '@ng-select/ng-select';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
-
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -28,6 +28,7 @@ import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
 		AppRoutingModule,
 		NgSelectModule,
 		FormsModule,
+		NgbModule,
 		ButtonModule,
 		HttpClientModule,
 		TableModule,

@@ -3,13 +3,13 @@
 permitAll()
 	/v2/auth
 	/user/save
+	/category/findAll
 role(ADMIN)
 #	/user/**
 	/role/**
 	/permission/**
 	/role-permission/**
 	/user-role/*
-	/category/**
 authenticated()
 	/v2/chapter-image/**
 	/story/**

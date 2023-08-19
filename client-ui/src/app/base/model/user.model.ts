@@ -1,12 +1,11 @@
-export class User {
-	id?: number;
+import {BaseEntity} from "./base.model";
+
+export class User extends BaseEntity{
 	username?: string;
 	password?: string;
 	email?: string;
 	lever?: number;
 	status?: number;
-	modifiedDate?: Date;
-	createdDate?: Date;
 }
 
 export class AuthRequest {

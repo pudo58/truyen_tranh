@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ToastrModule} from "ngx-toastr";
@@ -11,10 +10,11 @@ import {HeaderComponent} from "./component/header/header.component";
 import {FooterComponent} from "./component/footer/footer.component";
 import {CommonModule} from "@angular/common";
 import {NgSelectModule} from '@ng-select/ng-select';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
-
-
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {SpinnerModule} from "./component/spinner/spinner.module";
 
 @NgModule({
 	declarations: [
@@ -27,8 +27,10 @@ import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
 		BrowserModule,
 		AppRoutingModule,
 		NgSelectModule,
+		NgbDropdownModule,
 		FormsModule,
 		ButtonModule,
+		NgbModule,
 		HttpClientModule,
 		TableModule,
 		ReactiveFormsModule,
@@ -54,7 +56,8 @@ import { ButtonModule } from 'primeng/button'; // Import module của PrimeNG
 				warning: 'toast-warning',
 			}
 		}),
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		SpinnerModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

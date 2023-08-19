@@ -1,6 +1,8 @@
 package vn.tholv.web.core.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +30,6 @@ public class Category extends BaseEntity<Category, Integer> {
     private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     private List<Category> children = new ArrayList<>();
 }

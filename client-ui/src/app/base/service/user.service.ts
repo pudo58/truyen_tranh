@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {BaseService} from "./base/base.service";
 import {User} from "../model/user.model";
 import {Observable} from "rxjs";
-
+import {Injectable} from "@angular/core";
+@Injectable({providedIn: 'root'})
 export class UserService implements BaseService<User> {
 	public url = BASE_URL + '/user';
 

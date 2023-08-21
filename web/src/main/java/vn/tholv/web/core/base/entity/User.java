@@ -26,9 +26,16 @@ import java.util.Set;
 @AllArgsConstructor
 @DynamicUpdate
 public class User extends BaseEntity<User, Integer> implements UserDetails {
+    @Column(unique = true)
     private String username;
     private String password;
     private String email;
+
+    @Transient
+    private String recaptcha;
+
+    @Transient
+    private String rePassword;
     private short level = UserConst.LEVEL_BRONZE;
     private short status = UserConst.STATUS_ACTIVE;
 

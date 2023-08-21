@@ -8,6 +8,7 @@
 	<meta name="description" content="Truyện tranh online, đọc truyện tranh miễn phí, nhanh và cập nhật liên tục.">
 	<meta property="og:image" content="https://truyentranh.com/images/logo.png">
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -18,10 +19,15 @@
 	document.addEventListener('contextmenu', disableMouse);
 	document.addEventListener('mousedown', disableMouse);
 	document.addEventListener('keydown', disableViewSource);
+	document.addEventListener('copy', function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		return false;
+	});
 
 	function disableMouse(event) {
-		if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.tagName === 'SELECT' || event.target.tagName === 'OPTION' || event.target.tagName === 'LABEL'
-			|| event.target.tagName === 'UL' || event.target.tagName === 'LI') {
+		const tagList = ['INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'LABEL', 'UL', 'LI', 'BUTTON'];
+		if (tagList.includes(event.target.tagName)) {
 			return;
 		}
 		event.preventDefault();
@@ -36,6 +42,10 @@
 			return false;
 		}
 	}
+	let onloadCallback = function() {
+		alert("grecaptcha is ready!");
+	};
+
 </script>
 </body>
 </html>

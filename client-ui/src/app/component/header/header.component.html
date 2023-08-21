@@ -23,7 +23,7 @@
 			</ul>
 		</div>
 		<form class="d-flex w-50" [formGroup]="form" (keyup.enter)="search()">
-			<input type="text" class="form-control m-2" placeholder="Tìm kiếm..." formControlName="keyword"/>
+			<input type="text" class="form-control m-2" placeholder="Tìm kiếm theo tên truyện, danh mục" formControlName="keyword"/>
 			<button class="btn m-2 bg-light text-dark" (click)="search()">
 				<i class="bi bi-search"></i>
 			</button>

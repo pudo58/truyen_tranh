@@ -1,0 +1,81 @@
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<div class="col-lg-4 col-md-6 col-sm-6">
+			<div class="card shadow">
+				<div class="card-title text-center border-bottom">
+					<h2 class="p-3">Đăng ký</h2>
+				</div>
+				<div class="card-body">
+					<form [formGroup]="form" (keyup.enter)="onSubmit()">
+						<div class="mb-3">
+							<label for="username" class="form-label">Tài khoản <span
+								class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="username" formControlName="username"/>
+							<div class="text-danger" *ngIf="formControls['username']?.invalid && formSubmitted">
+								<small *ngIf="formControls['username']?.hasError('required')">Tài khoản không được để
+									trống</small>
+								<small *ngIf="formControls['username']?.hasError('maxlength')">
+									Tài khoản không được quá 20 ký tự
+								</small>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" id="email" formControlName="email"/>
+							<div class="text-danger" *ngIf="formControls['email']?.invalid && formSubmitted">
+								<small *ngIf="formControls['email']?.hasError('required')">Email không được để
+									trống</small>
+								<small *ngIf="formControls['email']?.hasError('maxlength')">
+									Email không được quá 255 ký tự
+								</small>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+							<input type="password" class="form-control" id="password" formControlName="password"/>
+							<div class="text-danger" *ngIf="formControls['password'].invalid && formSubmitted">
+								<small *ngIf="formControls['password'].hasError('required')">Mật khẩu không được để
+									trống</small>
+								<small *ngIf="formControls['password'].hasError('maxlength')">
+									Mật khẩu không được quá 20 ký tự
+								</small>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Nhập lại mật khẩu <span
+								class="text-danger">*</span></label>
+							<input type="password" class="form-control" id="rePassword" formControlName="rePassword"/>
+							<div class="text-danger" *ngIf="formControls['rePassword'].invalid && formSubmitted">
+								<small *ngIf="formControls['rePassword'].hasError('required')">Bạn chưa nhập lại mật
+									khẩu</small>
+								<small *ngIf="formControls['rePassword'].hasError('maxlength')">
+									Mật khẩu không được quá 20 ký tự
+								</small>
+								<small *ngIf="formControls['rePassword'].hasError('notMatch')">
+									Mật khẩu không trùng khớp
+								</small>
+							</div>
+						</div>
+						<ngx-recaptcha2 #captchaElem
+										[siteKey]="SITE_KEY"
+										(reset)="handleReset()"
+										(expire)="handleExpire()"
+										(load)="handleLoad()"
+										(success)="handleSuccess($event)"
+										[useGlobalDomain]="false"
+										formControlName="recaptcha">
+						</ngx-recaptcha2>
+						<div class="text-danger" *ngIf="formControls['recaptcha'].invalid && formSubmitted">
+							<small *ngIf="formControls['recaptcha'].hasError('required')">Bạn chưa xác nhận captcha</small>
+						</div>
+						<div class="d-grid">
+							<button type="submit" class="btn text-light bg-black" (click)="onSubmit()">Đăng ký</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<app-spinner [isLoading]="isLoading"></app-spinner>
+

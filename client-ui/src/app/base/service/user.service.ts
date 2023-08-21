@@ -20,7 +20,7 @@ export class UserService implements BaseService<User> {
 	}
 
 	save(t: User): Observable<User> {
-		return this.http.post<User>(this.url, t);
+		return this.http.post<User>(`${this.url}/save`, t);
 	}
 
 	update(t: User): Observable<User> {

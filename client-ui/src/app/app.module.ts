@@ -12,15 +12,14 @@ import {CommonModule} from "@angular/common";
 import {NgSelectModule} from '@ng-select/ng-select';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SpinnerModule} from "./component/spinner/spinner.module";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
-		FooterComponent,
+		FooterComponent
 	],
 	imports: [
 		CommonModule,

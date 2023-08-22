@@ -7,7 +7,7 @@
 				</div>
 				<div class="card-body">
 					<form [formGroup]="form" (keyup.enter)="onSubmit()">
-						<div class="mb-3">
+						<div>
 							<label for="username" class="form-label">Tài khoản <span
 								class="text-danger">*</span></label>
 							<input type="text" class="form-control" id="username" formControlName="username"/>
@@ -19,7 +19,7 @@
 								</small>
 							</div>
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="email" class="form-label">Email <span class="text-danger">*</span></label>
 							<input type="text" class="form-control" id="email" formControlName="email"/>
 							<div class="text-danger" *ngIf="formControls['email']?.invalid && formSubmitted">
@@ -28,9 +28,12 @@
 								<small *ngIf="formControls['email']?.hasError('maxlength')">
 									Email không được quá 255 ký tự
 								</small>
+								<small *ngIf="formControls['email']?.hasError('pattern')">
+									Email không đúng định dạng
+								</small>
 							</div>
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
 							<input type="password" class="form-control" id="password" formControlName="password"/>
 							<div class="text-danger" *ngIf="formControls['password'].invalid && formSubmitted">
@@ -41,7 +44,7 @@
 								</small>
 							</div>
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="password" class="form-label">Nhập lại mật khẩu <span
 								class="text-danger">*</span></label>
 							<input type="password" class="form-control" id="rePassword" formControlName="rePassword"/>
@@ -77,5 +80,5 @@
 		</div>
 	</div>
 </div>
-<app-spinner [isLoading]="isLoading"></app-spinner>
+<app-spinner [isLoading]="isLoading && isReloadCaptcha"></app-spinner>
 

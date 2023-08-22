@@ -13,6 +13,18 @@ public class ValidatorUtil {
 		return obj == null;
 	}
 
+    public static final boolean validateUsername(String username) {
+        return username.matches("^[a-zA-Z0-9_]{6,20}$");
+    }
+
+    public static final boolean validatePassword(String password) {
+        return password.matches("^[a-zA-Z0-9_]{6,}$");
+    }
+
+    public static final boolean validateEmail(String email) {
+        return email.matches("^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)+$");
+    }
+
 	public boolean isMatch(String str) {
 		return str.matches(pattern);
 	}

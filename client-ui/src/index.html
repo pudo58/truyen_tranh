@@ -8,11 +8,14 @@
 	<meta name="description" content="Truyện tranh online, đọc truyện tranh miễn phí, nhanh và cập nhật liên tục.">
 	<meta property="og:image" content="https://truyentranh.com/images/logo.png">
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=explicit&hl=vi" async defer></script>
 </head>
 
 <body>
 <app-root></app-root>
+<noscript>
+	Please enable JavaScript to continue using this application.
+</noscript>
 <script defer>
 	document.addEventListener('mousemove', disableMouse);
 	document.addEventListener('click', disableMouse);
@@ -42,9 +45,6 @@
 			return false;
 		}
 	}
-	let onloadCallback = function() {
-		alert("grecaptcha is ready!");
-	};
 
 </script>
 </body>

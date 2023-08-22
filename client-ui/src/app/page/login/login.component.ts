@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 				if(data?.accessToken || data?.refreshToken) {
 					document.cookie = `SESSION=${data.accessToken || data.refreshToken}; path=/;`;
 					this.toastrService.success('Đăng nhập thành công', 'Thành công');
-					this.router.navigate(['/']);
+					this.router.navigateByUrl('/home');
 					this.isLoading = false;
 				}else {
 					this.toastrService.error('Thông tin tài khoản hoặc mật khẩu không chính xác', 'Thất bại');

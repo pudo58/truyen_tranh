@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {DataStorageService} from "../../base/service/base/data-storage.service";
 import {UserService} from "../../base/service/user.service";
-import {LoginComponent} from "../login/login.component";
 
 @Component({
 	selector: 'app-register',
@@ -25,7 +24,7 @@ export class RegisterComponent implements OnInit {
 				private dataStorageService: DataStorageService,
 				private userService: UserService) {
 		this.form = this.fb.group({
-			email: [null, Validators.compose([Validators.required, Validators.maxLength(255)])],
+			email: [null, Validators.compose([Validators.required, Validators.maxLength(255), Validators.pattern(/^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)+$/)])],
 			username: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
 			password: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
 			rePassword: [null, Validators.compose([Validators.required, Validators.maxLength(20)])],
@@ -54,8 +53,8 @@ export class RegisterComponent implements OnInit {
 			this.formControls['rePassword'].setErrors({notMatch: true});
 			this.isLoading = false;
 		}
-		this.userService.save(this.form.value).subscribe((data : any) => {
-			if(!data.isError) {
+		this.userService.save(this.form.value).subscribe((data: any) => {
+			if (!data.isError) {
 				this.toastrService.success('Đăng ký thành công', 'Thành công');
 				this.router.navigate(['/login']);
 				this.isLoading = false;
@@ -68,24 +67,24 @@ export class RegisterComponent implements OnInit {
 
 	reloadGoogleCaptcha() {
 		const scriptElement = document.createElement('script');
-		scriptElement.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+		scriptElement.src = 'https://www.google.com/recaptcha/api.js?render=explicit&hl=vi';
 		scriptElement.async = true;
 		scriptElement.defer = true;
 		document.body.appendChild(scriptElement);
 		this.isReloadCaptcha = true;
 	}
 
-	handleReset(){
+	handleReset() {
 		this.form.reset();
 		this.reloadGoogleCaptcha();
 	}
 
-	handleExpire(){
+	handleExpire() {
 		this.formControls['recaptcha'].setErrors({expired: true});
 		this.reloadGoogleCaptcha();
 	}
 
-	handleLoad(){
+	handleLoad() {
 		this.isReloadCaptcha = false;
 	}
 

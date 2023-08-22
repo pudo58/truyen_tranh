@@ -1,5 +1,5 @@
 <div>
-	<nav class="navbar navbar-expand-sm bg-default">
+	<nav class="navbar navbar-expand-md bg-default">
 		<div class="container-sm">
 			<ul class="navbar-nav">
 				<li class="nav-item">
@@ -10,25 +10,43 @@
 						<a class="nav-link text-light" href="#" role="button" ngbDropdownToggle>
 							Danh mục
 						</a>
-						<div ngbDropdownMenu *ngIf="!isLoading" >
+						<div ngbDropdownMenu *ngIf="!isLoading && categoryList.length > 0">
 							<button ngbDropdownItem *ngFor="let item of categoryList; let i = index;">
 								{{i + 1}} . {{ item?.name }}
 							</button>
 						</div>
 					</div>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" *ngIf="!isLogin">
+					<a class="nav-link text-light" [routerLink]="'/login'">Đăng nhập</a>
+				</li>
+				<li class="nav-item" *ngIf="!isLogin">
 					<a class="nav-link text-light" [routerLink]="'/register'">Đăng ký</a>
 				</li>
+				<li class="nav-item" *ngIf="isLogin">
+					<div ngbDropdown>
+						<a class="nav-link text-light" href="#" role="button" ngbDropdownToggle>
+							Hồ sơ
+						</a>
+						<div ngbDropdownMenu>
+							<button ngbDropdownItem (click)="logout()">Đăng xuất</button>
+							<button ngbDropdownItem [routerLink]="'/profile'">Hồ sơ</button>
+							<button ngbDropdownItem [routerLink]="'/profile/edit'">Chỉnh sửa hồ sơ</button>
+							<button ngbDropdownItem [routerLink]="'/profile/change-password'">Đổi mật khẩu</button>
+							<button ngbDropdownItem [routerLink]="'/profile/bookmark'">Truyện đã đánh dấu</button>
+							<button ngbDropdownItem [routerLink]="'/profile/follow'">Truyện theo dõi</button>
+							<button ngbDropdownItem [routerLink]="'/profile/history'">Lịch sử đọc truyện</button>
+						</div>
+					</div>
+				</li>
 			</ul>
+			<form class="d-flex w-25" [formGroup]="form" (keyup.enter)="search()">
+				<input type="text" class="form-control m-2" placeholder="Tìm kiếm theo tên truyện,..." formControlName="keyword"/>
+				<button class="btn m-2 bg-light text-dark" (click)="search()">
+					<i class="bi bi-search"></i>
+				</button>
+			</form>
 		</div>
-		<form class="d-flex w-50" [formGroup]="form" (keyup.enter)="search()">
-			<input type="text" class="form-control m-2" placeholder="Tìm kiếm theo tên truyện, danh mục" formControlName="keyword"/>
-			<button class="btn m-2 bg-light text-dark" (click)="search()">
-				<i class="bi bi-search"></i>
-			</button>
-		</form>
 	</nav>
 </div>
-
 <app-spinner [isLoading]="isLoading"></app-spinner>

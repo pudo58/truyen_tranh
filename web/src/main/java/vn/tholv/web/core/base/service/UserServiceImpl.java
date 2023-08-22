@@ -10,6 +10,7 @@ import vn.tholv.web.core.base.dao.RoleDao;
 import vn.tholv.web.core.base.entity.Role;
 import vn.tholv.web.core.base.entity.User;
 import vn.tholv.web.core.base.service.core.AbstractService;
+import vn.tholv.web.core.override.util.ValidatorUtil;
 import vn.tholv.web.core.override.util.VerifyCaptcha;
 
 import java.util.List;
@@ -40,19 +41,16 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
         if (isNull(entity.getUsername())) {
             throw new RuntimeException("Tên đăng nhập không được để trống");
         }
-        if (entity.getUsername().length() < 6 || entity.getUsername().length() > 20) {
-            throw new RuntimeException("Tên đăng nhập phải có độ dài từ 6 đến 20 ký tự");
+        if (!ValidatorUtil.validateUsername(entity.getUsername())) {
+            throw new RuntimeException("Tên đăng nhập phải có độ dài từ 6 đến 20 ký tự và không chứa ký tự đặc biệt");
         }
-        if (entity.getUsername().matches(".*\\s.*")) {
-            throw new RuntimeException("Tên đăng nhập không được chứa khoảng trắng");
-        }
-        if (isNull(entity.getPassword())) {
-            throw new RuntimeException("Mật khẩu không được để trống");
+        if (!ValidatorUtil.validatePassword(entity.getPassword())) {
+            throw new RuntimeException("Mật khẩu phải có độ dài từ 6 ký tự và không chứa ký tự đặc biệt");
         } else {
-            if (entity.getPassword().length() < 6) {
-                throw new RuntimeException("Mật khẩu phải có ít nhất 6 ký tự");
-            }
             entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
+        if (!ValidatorUtil.validateEmail(entity.getEmail())) {
+            throw new RuntimeException("Email không đúng định dạng");
         }
         try {
             if (!this.verifyCaptcha.verify(entity.getRecaptcha())) {
@@ -73,7 +71,23 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
 
     @Override
     protected void validateUpdate(User entity) {
-
+        if (isNull(entity)) {
+            throw new RuntimeException("Dữ liệu không hợp lệ");
+        }
+        if (isNull(entity.getUsername())) {
+            throw new RuntimeException("Tên đăng nhập không được để trống");
+        }
+        if (!ValidatorUtil.validateUsername(entity.getUsername())) {
+            throw new RuntimeException("Tên đăng nhập phải có độ dài từ 6 đến 20 ký tự và không chứa ký tự đặc biệt");
+        }
+        if (!ValidatorUtil.validatePassword(entity.getPassword())) {
+            throw new RuntimeException("Mật khẩu phải có độ dài từ 6 ký tự và không chứa ký tự đặc biệt");
+        } else {
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        }
+        if (!ValidatorUtil.validateEmail(entity.getEmail())) {
+            throw new RuntimeException("Email không đúng định dạng");
+        }
     }
 
     @Override

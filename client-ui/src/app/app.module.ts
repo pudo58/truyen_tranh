@@ -14,12 +14,16 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SpinnerModule} from "./component/spinner/spinner.module";
+import { LogoutComponent } from './page/logout/logout.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
-		FooterComponent
+		FooterComponent,
+  LogoutComponent,
+  ProfileComponent
 	],
 	imports: [
 		CommonModule,

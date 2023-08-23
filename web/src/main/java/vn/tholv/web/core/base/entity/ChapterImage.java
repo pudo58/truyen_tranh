@@ -19,8 +19,11 @@ import vn.tholv.web.core.base.entity.core.BaseEntity;
 @DynamicUpdate
 public class ChapterImage extends BaseEntity<ChapterImage, Integer> {
 	@Lob
-	private String imageData;
+	private String imageData;// lưu ảnh base64
 	private Integer priority;
+    private String type;
+    private String content;
+
 
 	@ManyToOne(targetEntity = Chapter.class)
 	@JoinColumn(name = "chapter_id")

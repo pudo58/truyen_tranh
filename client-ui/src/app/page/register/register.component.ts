@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {DataStorageService} from "../../base/service/base/data-storage.service";
 import {UserService} from "../../base/service/user.service";
+import {ErrorException} from "../../base/model/base.model";
 
 @Component({
 	selector: 'app-register',
@@ -31,6 +32,7 @@ export class RegisterComponent implements OnInit {
 			recaptcha: ['', Validators.compose([Validators.required])]
 		})
 		this.dataStorageService.header = false;
+		this.dataStorageService.footer = false;
 	}
 
 	get formControls() {
@@ -54,12 +56,12 @@ export class RegisterComponent implements OnInit {
 			this.isLoading = false;
 		}
 		this.userService.save(this.form.value).subscribe((data: any) => {
-			if (!data.isError) {
-				this.toastrService.success('Đăng ký thành công', 'Thành công');
-				this.router.navigate(['/login']);
+			if (data instanceof ErrorException) {
+				this.toastrService.error(data.detail, 'Lỗi');
 				this.isLoading = false;
 			} else {
-				this.toastrService.error(data.detail, 'Thất bại');
+				this.toastrService.success('Đăng ký thành công', 'Thành công');
+				this.router.navigateByUrl('login')
 				this.isLoading = false;
 			}
 		});

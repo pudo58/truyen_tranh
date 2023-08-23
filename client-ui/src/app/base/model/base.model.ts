@@ -10,3 +10,10 @@ export class BaseEntity {
 	modifiedDate?: Date;
 	createdDate?: Date;
 }
+
+export class ErrorException {
+	message?: string;
+	detail?: string;
+	status?: number;
+	isError?: boolean;
+}

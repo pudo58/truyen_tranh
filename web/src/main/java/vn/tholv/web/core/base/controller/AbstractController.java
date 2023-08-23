@@ -14,7 +14,7 @@ public class AbstractController<T extends BaseEntity<T, ID>, ID> {
 	private Service<T, ID> service;
 
 	@GetMapping("/{id}")
-	public T findById(@PathVariable ID id) {
+	public T findById(@PathVariable String id) throws Exception{
 		return this.service.findById(id);
 	}
 
@@ -24,12 +24,12 @@ public class AbstractController<T extends BaseEntity<T, ID>, ID> {
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteById(@PathVariable ID id) {
+	public void deleteById(@PathVariable String id) throws Exception{
 		this.service.deleteById(id);
 	}
 
 	@PutMapping("/update")
-	public T update(@PathVariable T entity) {
+	public T update(@RequestBody T entity) throws Exception{
 		return this.service.update(entity);
 	}
 

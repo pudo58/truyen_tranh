@@ -4,6 +4,7 @@ permitAll()
 	/v2/auth
 	/user/save
 	/category/findAll
+	/user/**
 role(ADMIN)
 #	/user/**
 	/role/**

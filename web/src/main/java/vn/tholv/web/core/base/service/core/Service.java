@@ -6,13 +6,13 @@ import vn.tholv.web.core.base.entity.core.BaseEntity;
 import java.util.List;
 
 public interface Service<T extends BaseEntity<T, ID>, ID> {
-	T findById(ID id);
+	T findById(String id) throws Exception;
 
 	T save(T entity);
 
-	void deleteById(ID id);
+	void deleteById(String id) throws Exception;
 
-	T update(T entity);
+	T update(T entity) throws Exception;
 
 	List<T> priority(List<T> entityList);
 

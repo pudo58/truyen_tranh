@@ -35,6 +35,35 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
 
     @Override
     protected void validateInsert(User entity) {
+        validate(entity);
+    }
+
+    @Override
+    protected void validateUpdate(User entity) {
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.repository.findAll((root, query, criteriaBuilder) ->
+            criteriaBuilder.equal(root.get("username"), username)
+        ).stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return super.findAll().stream().peek(user -> user.setPassword(null)).toList();
+    }
+
+    @Override
+    public User update(User entity) throws Exception {
+        if (isNull(entity.getPassword())) {
+            entity.setPassword(findById(entity.getUid()).getPassword());
+        }
+        return super.update(entity);
+    }
+
+    private void validate(User entity){
         if (isNull(entity)) {
             throw new RuntimeException("Dữ liệu không hợp lệ");
         }
@@ -67,38 +96,5 @@ public class UserServiceImpl extends AbstractService<User, Integer> implements U
         } catch (Exception e) {
             throw new RuntimeException("Captcha không hợp lệ");
         }
-    }
-
-    @Override
-    protected void validateUpdate(User entity) {
-        if (isNull(entity)) {
-            throw new RuntimeException("Dữ liệu không hợp lệ");
-        }
-        if (isNull(entity.getUsername())) {
-            throw new RuntimeException("Tên đăng nhập không được để trống");
-        }
-        if (!ValidatorUtil.validateUsername(entity.getUsername())) {
-            throw new RuntimeException("Tên đăng nhập phải có độ dài từ 6 đến 20 ký tự và không chứa ký tự đặc biệt");
-        }
-        if (!ValidatorUtil.validatePassword(entity.getPassword())) {
-            throw new RuntimeException("Mật khẩu phải có độ dài từ 6 ký tự và không chứa ký tự đặc biệt");
-        } else {
-            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        }
-        if (!ValidatorUtil.validateEmail(entity.getEmail())) {
-            throw new RuntimeException("Email không đúng định dạng");
-        }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.repository.findAll((root, query, criteriaBuilder) ->
-            criteriaBuilder.equal(root.get("username"), username)
-        ).stream().findFirst().orElse(null);
-    }
-
-    @Override
-    public List<User> findAll() {
-        return super.findAll().stream().peek(user -> user.setPassword(null)).toList();
     }
 }

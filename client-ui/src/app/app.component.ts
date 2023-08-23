@@ -7,6 +7,7 @@ import { DataStorageService } from './base/service/base/data-storage.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	public showHeader: boolean = true;
+	public showFooter: boolean = true;
 
 	constructor(private dataStorageService: DataStorageService) {}
 
@@ -15,12 +16,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.initHeader();
+		this.initUI();
 	}
 
-	initHeader() {
+	initUI() {
 		this.dataStorageService.showHeaderChange.subscribe((val) => {
 			this.showHeader = val;
+		});
+		this.dataStorageService.showFooterChange.subscribe((val) => {
+			this.showFooter = val;
 		});
 	}
 }

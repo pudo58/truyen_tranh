@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../base/service/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {DataStorageService} from "../../base/service/base/data-storage.service";
+import {AuthModel} from "../../base/model/base.model";
 
 @Component({
 	selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 			rememberMe: false,
 		})
 		this.dataStorageService.header = false;
+		this.dataStorageService.footer = false;
 	}
 
 	get formControls() {

@@ -12,10 +12,8 @@ import java.sql.Timestamp;
 
 @MappedSuperclass
 @SuppressWarnings("all")
-@Getter
 public class BaseEntity<T, ID> extends CloneObject<T> implements Serializable {
     private static final long serialVersionUID = 1L;
-
     public static final String _id = "id";
     public static final String _createdDate = "createdDate";
     public static final String _modifiedDate = "modifiedDate";
@@ -32,6 +30,7 @@ public class BaseEntity<T, ID> extends CloneObject<T> implements Serializable {
     protected Timestamp modifiedDate;
 
     @JsonProperty(_id)
+    @Transient
     protected String uid;
 
     public ID getId() {

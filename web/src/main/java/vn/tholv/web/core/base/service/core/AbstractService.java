@@ -64,7 +64,7 @@ public abstract class AbstractService<T extends BaseEntity<T, ID>, ID> implement
         if (result == null) {
             return new ArrayList<>();
         }
-        if (this.isHadPriorityField(result.get(0))) {
+        if (!result.isEmpty() && this.isHadPriorityField(result.get(0))) {
             return this.repository.findAll((root, query, builder) -> {
                 query.orderBy(
                     builder.asc(root.get(PRIORITY_FIELD_NAME)),
@@ -161,5 +161,9 @@ public abstract class AbstractService<T extends BaseEntity<T, ID>, ID> implement
         } else {
             PRIORITY_FIELD_NAME = "priority";
         }
+    }
+
+    protected void nothingValidate() {
+        this.isValidate = false;
     }
 }

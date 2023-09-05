@@ -1,5 +1,6 @@
 package vn.tholv.web.core.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +24,6 @@ public class StoryDetail extends BaseEntity<StoryDetail, Integer> {
 
 	@ManyToOne(targetEntity = Story.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "story_id")
+    @JsonIgnoreProperties("storyDetailList")
 	private Story story;
 }
